@@ -1,0 +1,16 @@
+{
+  "name": "debitoor-income-output-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debitoor": "^1.2.0",
+    "json2csv": "^2.12.0",
+    "underscore": "^1.8.3"
+  }
+}
