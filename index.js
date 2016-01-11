@@ -1,12 +1,15 @@
+var fs = require('fs');
+
+// Configuration
+var ACCESS_TOKEN = fs.readFileSync('./.access_token').toString();
+console.log(ACCESS_TOKEN);
+var YEAR = 2015;
+
 // Dependencies
 var debitoor = require('debitoor')(ACCESS_TOKEN);
 var _ = require('underscore');
 var json2csv = require('json2csv');
-var fs = require('fs');
 
-// Configuration
-var ACCESS_TOKEN = 'eyJ1c2VyIjoiNTM1NTE5OTE4YzU5Mzc1ZDJiMzM1MzJhIiwiYXBwIjoiNTYwNmUxNDRiMmYyZjYwYzAwNjlhNzNiIiwiY2hhbGxlbmdlIjowLCIkZSI6MH0KEgXDgzfDhMK5LAvDvAdnCEbCm8OFw5w';
-var YEAR = 2014;
 
 debitoor('/sales/invoices/v1', function(error, response, body){
 
@@ -23,7 +26,7 @@ debitoor('/sales/invoices/v1', function(error, response, body){
 
 				var paymentDate = new Date(payment.paymentDate);
 
-				if(paymentDate.getYear() + 1900 === YEAR) {
+				if(paymentDate.getFullYear() === YEAR) {
 					var amountGross = payment.amount;
 					var amountNet = amountGross/1.2;
 					var amountTax = amountGross - amountNet;
