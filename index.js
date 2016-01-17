@@ -2,7 +2,6 @@ var fs = require('fs');
 
 // Configuration
 var ACCESS_TOKEN = fs.readFileSync('./.access_token').toString();
-console.log(ACCESS_TOKEN);
 var YEAR = 2015;
 
 // Dependencies
@@ -49,8 +48,8 @@ debitoor('/sales/invoices/v1', function(error, response, body){
 
 	json2csv({ data: data, fields: fields, fieldNames: fieldNames, del: ';' }, function(err, csv) {
 		if (err) console.log(err);
-			fs.writeFile('income.csv', csv, function(err) {
-		if (err) throw err;
+		fs.writeFile('income.csv', csv, function(err) {
+			if (err) throw err;
 			console.log('file saved');
 		});
 	});
