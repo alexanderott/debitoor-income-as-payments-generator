@@ -31,7 +31,7 @@ debitoor('/sales/invoices/v1', function(error, response, body){
 					var amountTax = amountGross - amountNet;
 
 					data.push({
-						number: index,
+						number: index + 1,
 						invoiceNumber: invoice.number,
 						invoiceDate: invoice.date,
 						bookingDate: payment.paymentDate,
