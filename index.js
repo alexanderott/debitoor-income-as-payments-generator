@@ -38,7 +38,11 @@ debitoor('/sales/invoices/v1', function(error, response, body){
 						amountNet: (Math.round(amountNet*100)/100).toString().replace('.', ','),
 						amountTax: (Math.round(amountTax*100)/100).toString().replace('.', ','),
 						amountGross: (Math.round(amountGross*100)/100).toString().replace('.', ',')
-					})
+					});
+
+					data.sort(function(a,b){
+						return new Date(a.bookingDate) - new Date(b.bookingDate);
+					});
 
 					index++;
 				}
