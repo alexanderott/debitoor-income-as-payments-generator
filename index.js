@@ -19,15 +19,24 @@ debitoor('/sales/invoices/v1', function(error, response, body){
 
 	var index = 0;
 
+	body = JSON.parse(fs.readFileSync('./body.json'));
+
+
 	_.each(body, function(invoice, i, list){
 		if(invoice.payments){
 			_.each(invoice.payments, function(payment, j, list){
 
 				var paymentDate = new Date(payment.paymentDate);
 
+				var taxRate = invoice.lines[0].taxRate;
+
 				if(paymentDate.getFullYear() === YEAR) {
 					var amountGross = payment.amount;
-					var amountNet = amountGross/1.2;
+					var amountNet = amountGross;
+					
+					if(taxRate !== 0) {
+						amountNet = amountGross/(taxRate/100+1);
+					}
 					var amountTax = amountGross - amountNet;
 
 					data.push({
